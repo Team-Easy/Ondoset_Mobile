@@ -165,13 +165,9 @@ struct CoordiMainView: View {
                                                                             
                                                                             await coordiMainVM.getCoordiRecord(year: selectedYear, month: selectedMonth)
                                                                         }
-                                                                        
                                                                     }
-                                                                    
                                                                 }
                                                             }
-                                                            
-                                                    
                                                         
                                                         Menu(content: {
 
@@ -300,9 +296,7 @@ struct CoordiMainView: View {
                                                                             
                                                                             await coordiMainVM.getCoordiRecord(year: selectedYear, month: selectedMonth)
                                                                         }
-                                                                        
                                                                     }
-                                                                    
                                                                 }
                                                             }
                                                         
@@ -401,9 +395,7 @@ struct CoordiMainView: View {
                                                                                 
                                                                                 await coordiMainVM.getCoordiRecord(year: selectedYear, month: selectedMonth)
                                                                             }
-                                                                            
                                                                         }
-                                                                        
                                                                     }
                                                                 }
                                                             
@@ -475,7 +467,6 @@ struct CoordiMainView: View {
                                                                 .foregroundStyle(.main)
                                                                 .frame(width: 175, alignment: .leading)
                                                             
-                                                            
                                                             Spacer()
                                                             
                                                             Menu(content: {
@@ -540,16 +531,22 @@ struct CoordiMainView: View {
                                             
                                             if let coordiRecord = coordiMainVM.coordiRecord.first(where: {$0.year == selectedYear && $0.month == selectedMonth && $0.day == day.day}) {
                                                 
-                                                ScrollView(showsIndicators: false) {
+                                                VStack(spacing: 0) {
                                                     
-                                                    ForEach(coordiRecord.clothesList, id: \.self) { cloth in
+                                                    ScrollView(showsIndicators: false) {
                                                         
-                                                        ClothSelectedComponent(category: cloth.category, clothName: cloth.name, clothTag: cloth.tag, clothThickness: cloth.thickness ?? nil, width: screenWidth - 50)
-                                                
+                                                        ForEach(coordiRecord.clothesList, id: \.self) { cloth in
+                                                            
+                                                            ClothSelectedComponent(category: cloth.category, clothName: cloth.name, clothTag: cloth.tag, clothThickness: cloth.thickness ?? nil, width: screenWidth - 50)
+                                                    
+                                                        }
                                                     }
+                                                    .tag(coordiRecord.day)
+                                                    .padding(.bottom, tabBarHeight)
+                                                    
+                                                    Spacer()
                                                 }
-                                                .tag(coordiRecord.day)
-                                                .padding(.bottom, screenHeight / 10)
+                                                .ignoresSafeArea(edges: .bottom)
                                                 
                                             } else {
                                                 
@@ -584,9 +581,8 @@ struct CoordiMainView: View {
                             } // ForEach
            
                         } // VStack
-     
+//                        .ignoresSafeArea(edges: .bottom)
                     }
-                    
                 } // GeometryReader
 
                 if showCoordiDeleteAlert {
@@ -604,9 +600,9 @@ struct CoordiMainView: View {
                         }
                         
                     }
-                }
+                } // GeometryReader
             } // ZStack
-
+            .ignoresSafeArea(edges: .bottom)
         } // NavigationStack
         .sheet(isPresented: $openPhoto, content: {
             ImagePicker(sourceType: .photoLibrary, selectedImage: $coordiImage)
@@ -624,14 +620,14 @@ struct CoordiMainView: View {
         .sheet(isPresented: $isPutGoOutTimeSheetPresented) {
             
             PutGoOutTimeView(selectedCoordiId: $toSetTimeCoordiId, selectedYear: $selectedYear, selectedMonth: $selectedMonth, selecteddDays: $selectedDays, goOutRegioin: $goOutRegion, goOutDepartTime: $goOutDepartTime, goOutArrivalTime: $goOutArrivalTime, isPutGoOutTimeSheetPresented: $isPutGoOutTimeSheetPresented)
-                .presentationDetents([.height(screenHeight / 4)])
+                .presentationDetents([.height(screenHeight / 3)])
                 .environmentObject(coordiMainVM)
             
         }
         .sheet(isPresented: $isRegisterGoOutTimeSheetPresented) {
             
             RegisterGoOutTimeView(selectedCoordiId: $toSetTimeCoordiId, selectedYear: $selectedYear, selectedMonth: $selectedMonth, selectedDays: $selectedDays, goOutRegion: $goOutRegion, isRegisterGoOutTimeSheetPresented: $isRegisterGoOutTimeSheetPresented)
-                .presentationDetents([.height(screenHeight / 4)])
+                .presentationDetents([.height(screenHeight / 3)])
                 .environmentObject(coordiMainVM)
         }
         .sheet(isPresented: $isAddCoordiPlanSheetPresented) {
@@ -705,6 +701,8 @@ struct CoordiMainView: View {
                 await coordiMainVM.getCoordiRecord(year: selectedYear, month: selectedMonth)
 
             }
+            
+//            wholeVM.isTabBarHidden = true
         }
         .onChange(of: selectedYear) { _ in
             
@@ -887,7 +885,6 @@ struct CoordiMainView: View {
                                         value.scrollTo(day.day, anchor: .center)
                                     }
                                 }
-
                             
                             Text("\(day.weekday)")
                                 .font(Font.pretendard(.regular, size: 13))
@@ -947,16 +944,13 @@ struct CoordiMainView: View {
                                                 .font(Font.pretendard(.semibold, size: 10))
                                                 .foregroundStyle(.red)
                                         }
+                                        .frame(width: 60)
                                         .offset(y: screenHeight / 16)
                                         
                                     }
-                                    
                                 }
-   
                             }
-      
                         }
-                        
                     }
                 }
                 .padding()

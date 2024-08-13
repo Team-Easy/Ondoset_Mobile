@@ -214,6 +214,9 @@ struct PutCoordiRecordView: View {
                     }
                 }
             }
+            
+            Spacer()
+        
         }
         .onAppear {
             

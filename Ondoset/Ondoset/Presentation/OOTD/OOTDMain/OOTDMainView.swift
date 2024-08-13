@@ -132,7 +132,7 @@ struct OOTDMainView: View {
                             }
                         } // ZStack
                         .tag("추천")
-                        .padding(.bottom, screenHeight / 18)
+                        //.padding(.bottom, screenHeight / 18)
                         
                         /// 추천 뷰
                         
@@ -270,16 +270,16 @@ struct OOTDMainView: View {
                             }
                         }
                         .tag("날씨")
-                        .padding(.bottom, screenHeight / 18)
+//                        .padding(.bottom, screenHeight / 18)
                         
                     }
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-
-                    Spacer()
-                }
+                    .padding(.bottom, tabBarHeight)
+                } // VStack
                 .onAppear {
                     wholeVM.isTabBarHidden = false
-                } // VStack
+                }
+                .ignoresSafeArea(edges: .bottom)
                 
                 if showCantPostOOTDAlert {
                     
@@ -307,6 +307,8 @@ struct OOTDMainView: View {
                         isPostAvailable = false
                     }
                 }
+                wholeVM.isTabBarHidden = true
+                
             }
         }
     }

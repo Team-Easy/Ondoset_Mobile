@@ -194,6 +194,8 @@ struct OOTDItemView: View {
                         }
                     }
                     .padding(.horizontal, 15)
+                    
+                    Spacer()
 
                 } // VStack
             } // ScrollView

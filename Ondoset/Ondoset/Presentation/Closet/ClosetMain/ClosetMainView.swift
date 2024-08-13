@@ -17,6 +17,7 @@ struct ClosetMainView: View {
     
 //    @State var searchText: String = ""
     @StateObject var closetMainVM: ClosetMainViewModel = .init()
+    @EnvironmentObject var wholeVM: WholeViewModel
     
     var body: some View {
         /// 각 탭의 메인 뷰마다 NavigationStack을 두는 것으로 설계합니다.
@@ -41,8 +42,12 @@ struct ClosetMainView: View {
                     }
                 }
                 else {
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
+                        
+                        Spacer()
+                        
                         LazyVStack(spacing: 16, content: {
+                            
                             ForEach(closetMainVM.presentingClothesData, id: \.clothesId) { item in
                                 ClothSelectedComponent(
                                     category: item.category,
@@ -62,11 +67,15 @@ struct ClosetMainView: View {
                                     }
                             }
                         })
+                        
+                        Spacer()
                     }
-                    .padding(.vertical)
-                    Spacer(minLength: 60)
+                    .padding(.top, 15)
+                    .padding(.bottom, tabBarHeight)
+//                    Spacer(minLength: 60)
                 }
-            }
+            } // VStack
+            .ignoresSafeArea(edges: .bottom)
         }
         .overlay{
             Button(action: {
@@ -83,10 +92,8 @@ struct ClosetMainView: View {
                         .frame(width: 12, height: 12)
                         .offset(x: 15, y: -15)
                 }
-                
-                    
             })
-            .offset(x: 145, y: 290)
+            .offset(x: screenWidth/2 - 50, y: screenHeight/2 - tabBarHeight - 50)
         }
         .overlay {
             if closetMainVM.presentAlert {
