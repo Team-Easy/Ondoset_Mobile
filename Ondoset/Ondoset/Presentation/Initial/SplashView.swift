@@ -18,10 +18,12 @@ struct SplashView: View {
             
             if !isLogin && isActive {
                 SignInView()
-            } else if isLogin && isActive && !isFirst {
+            } else if isLogin && isActive {
                 OndosetHome()
-            } else if isLogin && isActive && isFirst {
-                OnboardingView()
+//            } else if isLogin && isActive && !isFirst {
+//                OndosetHome()
+//            } else if isLogin && isActive && isFirst {
+//                OnboardingView()
             } else {
                 
                 ZStack {
