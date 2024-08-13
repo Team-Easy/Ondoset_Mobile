@@ -121,7 +121,7 @@ struct AppTabView: View {
             } // HStack
             .offset(y: -10)
         }
-        .frame(width: screenWidth, height: screenHeight / 9)
+        .frame(width: screenWidth, height: tabBarHeight)
         .background(Color(hex: 0xF8F8F8))
     }
 }

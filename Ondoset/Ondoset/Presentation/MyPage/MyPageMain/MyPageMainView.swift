@@ -197,9 +197,7 @@ struct MyPageMainView: View {
                         await myPageVM.readMyProfile()
                     }
                 }
-                .padding(.bottom, screenHeight / 18)
-                
-                Spacer()
+                .padding(.bottom, tabBarHeight)
             }
             .onAppear {
                 wholeVM.isTabBarHidden = false
@@ -208,7 +206,9 @@ struct MyPageMainView: View {
                     await myPageVM.readMyProfile()
                 }
             }
+            .ignoresSafeArea(edges: .bottom)
         }
+        
     }
 }
 
