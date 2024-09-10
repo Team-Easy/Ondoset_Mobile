@@ -63,6 +63,7 @@ struct SignUpSecondView: View {
                 }
             }
             .padding(.top, 80)
+            .disabled(!signUpVM.isSignUpBtnAvailable)
             
             Spacer()
         }

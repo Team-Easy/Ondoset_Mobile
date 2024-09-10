@@ -109,6 +109,7 @@ struct SignUpFirstView: View {
                             .foregroundStyle(signUpVM.isNextBtnAvailable ? .white : .darkGray)
                     )
             }
+            .disabled(!signUpVM.isNextBtnAvailable)
             
             Spacer()
         }
