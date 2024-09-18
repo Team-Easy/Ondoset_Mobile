@@ -28,6 +28,7 @@ final class APIManager {
             result = try request.result.get()
         } catch {
             print("====네트워크 에러====")
+            print("\(String(data: result, encoding: .utf8))")
             return nil
         }
         
@@ -36,6 +37,7 @@ final class APIManager {
             return decodedData.result
         } catch {
             print("====디코딩 에러====")
+            print("\(String(data: result, encoding: .utf8))")
             return nil
         }
     }
