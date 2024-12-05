@@ -49,7 +49,7 @@ struct HomeMainView: View {
         .onAppear(perform: {
             homeMainVM.homeViewDate = .now
             
-            locationManager.requestLocation()
+//            locationManager.requestLocation()
             
             if let location = locationManager.currentLocation {
                 

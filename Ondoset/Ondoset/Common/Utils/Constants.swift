@@ -14,14 +14,15 @@ import UIKit
 struct Constants {
     
     static let successResponseCode: String = "common_2000"
-    static var serverURL = isAvailableUnivURL ? univURL : ec2URL
+    static var serverURL = isDevelopURL ? developURL : ec2URL
 }
 
-// 학과서버 죽으면 false, 쓸 수 있으면 true
-let isAvailableUnivURL: Bool = false
+let isDevelopURL: Bool = false
 
-let univURL = "http://ceprj.gachon.ac.kr:60019"
+// 개발용
+let developURL = "http://ec2-43-201-46-189.ap-northeast-2.compute.amazonaws.com:8080/member/test"
 //let ec2URL = "http://ec2-43-201-46-189.ap-northeast-2.compute.amazonaws.com:8080"
+/// 운영용
 let ec2URL = "https://ondoset.shop"
 
 

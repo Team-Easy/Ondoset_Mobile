@@ -14,5 +14,7 @@
 		<string>Pretendard-SemiBold.otf</string>
 		<string>Pretendard-Thin.otf</string>
 	</array>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>앱에서 사진을 선택하기 위해 접근 권한이 필요합니다.</string>
 </dict>
 </plist>
